@@ -9,9 +9,32 @@ app.use(express.json())
 
 
 //Routers//
+
+//INDEX route //
+
+
+//NEW route //
+
+
+//DELETE route //
+
+
+//UPDATE route //
+
+
+//CREATE route //
 app.get('/', (req,res) => {
     res.send('Hey there! Hello World!')
 })
+
+
+//EDIT route //
+
+
+
+//SHOW route //
+
+
 
 app.use('/auth', AuthRouter)
 
