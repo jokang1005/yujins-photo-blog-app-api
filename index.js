@@ -9,7 +9,7 @@ const mongoose = require("./db/conn")
 const morgan = require("morgan")
 const cors = require("cors")
 const corsOptions = require("./config/cors")
-
+const AuthRouter = require('./controllers/user')
 
 ///////////////////////
 //Middleware//
@@ -23,6 +23,7 @@ app.use(express.static("public"))
 ///////////////////////
 //Routes//
 ///////////////////////
+app.use("/auth", AuthRouter)
 
 
 //INDEX route //

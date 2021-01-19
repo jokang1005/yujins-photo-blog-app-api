@@ -1,7 +1,7 @@
 require("dotenv").config()
 const {MONGODBURI} = process.env
 const mongoose = require("mongoose")
-const config = {useNewUrlParser: true, userUnifiedTopology: true}
+const config = {useNewUrlParser: true, useUnifiedTopology: true}
 
 /////////////////////////
 //CONNECT TO MONGO//
