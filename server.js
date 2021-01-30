@@ -12,6 +12,7 @@ const morgan = require("morgan")
 const cors = require("cors")
 const corsOptions = require("./config/cors")
 const AuthRouter = require('./controllers/user')
+const auth = require("./auth")
 
 ///////////////////////
 //Middleware//
@@ -25,6 +26,10 @@ app.use(express.static("public"))
 ///////////////////////
 //Routes//
 ///////////////////////
+app.get("/", auth, (req,res) => {
+    res.json(req.payload)
+})
+
 app.use("/auth", AuthRouter)
 
 
