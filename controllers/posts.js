@@ -6,8 +6,7 @@ const router = Router();
 //INDEX//
 router.get("/", auth, async (req,res) => {
     try {
-        const { username } = req.payload
-        res.status(200).json(await Post.find({username}))
+        res.status(200).json(await Post.find())
     }
     catch(error) {
         res.status(400).json({error})
@@ -32,7 +31,7 @@ router.put("/:id", auth, async (req,res) => {
         const { username } = req.payload
         req.body.username = username
         const {id} = req.params
-        res.status(200).json(await Post.findByIdAndUpdate(id, req.body))
+        res.status(200).json(await Post.findByIdAndUpdate(id, req.body, {new: true}))
     }
     catch(error) {
         res.status(400).json({error})
