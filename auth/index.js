@@ -1,14 +1,18 @@
 require("dotenv").config()
+const {SECRET} = process.env
 const jwt = require("jsonwebtoken")
 
 const auth = async (req, res, next) => {
     //Authorization: "bearer token"
     try{
     if (req.headers.authorization) {
+        console.log("Hello")
         const token = req.headers.authorization.split(" ")[1]
-        const payload = jwt.verity(token, SECRET);
+        console.log(token)
+        const payload = jwt.verify(token, SECRET);
+        console.log(payload)
         if(payload) {
-            req.body.payload = payload
+            req.payload = payload
             next();
         }else {
             res.status(400).json({error: "VERIFICATION FAILED OR NO PAYLOAD"})
@@ -21,3 +25,4 @@ const auth = async (req, res, next) => {
     }
 }
 
+module.exports = auth
