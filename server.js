@@ -7,11 +7,14 @@ require("dotenv").config()
 const {PORT, NODE_ENV} = process.env
 const express = require('express')
 const app = express()
+const bodyParser = require("body-parser")
 const mongoose = require("./db/conn")
+const fs = require("fs")
 const morgan = require("morgan")
 const cors = require("cors")
 const corsOptions = require("./config/cors")
 const AuthRouter = require('./controllers/user')
+const PostRouter = require('./controllers/posts')
 const auth = require("./auth")
 
 ///////////////////////
@@ -31,6 +34,8 @@ app.get("/", auth, (req,res) => {
 })
 
 app.use("/auth", AuthRouter)
+
+app.use("/post", PostRouter)
 
 
 //INDEX route //
