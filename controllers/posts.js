@@ -2,6 +2,8 @@ const Post = require("../models/model")
 const auth = require("../auth")
 const { Router } = require("express")
 const router = Router();
+const multer = require("multer")
+
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -29,7 +31,7 @@ const upload = multer({
     stores image in uploads folder using multer and creates a reference to the file
     */
 
-ImageRouter.route("/uploadmulter")
+router.route("/uploadmulter")
     .post(upload.single('imageData'), (req,res,next) => {
         console.log(req.body);
         const newImage = new Image({
