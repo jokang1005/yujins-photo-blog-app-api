@@ -25,6 +25,7 @@ app.use(morgan("tiny"))
 app.use(express.json())
 app.use(express.static("public"))
 
+app.use('/uploads', express.static('uploads'))
 
 ///////////////////////
 //Routes//
@@ -36,6 +37,7 @@ app.get("/", auth, (req,res) => {
 app.use("/auth", AuthRouter)
 
 app.use("/post", PostRouter)
+
 
 
 //INDEX route //
