@@ -22,35 +22,39 @@ const fileFilter = (req, file, cb) => {
     }
 }
 
-const upload = multer({
-    storage: storage,
-    limits: {
-        fileSize: 1024 * 1024 * 5
-    },
-    fileFilter: fileFilter
-});
+const upload = multer();
+router.post("/upload", upload.single("file"), function(req,res,next) {
+    console.log(req.body)
+})
+// const upload = multer({
+//     storage: storage,
+//     limits: {
+//         fileSize: 1024 * 1024 * 5
+//     },
+//     fileFilter: fileFilter
+// });
     /*
     stores image in uploads folder using multer and creates a reference to the file
     */
 
-router.route("/uploadmulter")
-    .post(upload.single('imageData'), (req,res,next) => {
-        console.log(req.body);
-        const newImage = new Image({
-            imageName: req.body.imageName,
-            imageData: req.file.path
-        });
+// router.route("/uploadmulter")
+//     .post(upload.single('imageData'), (req,res,next) => {
+//         console.log(req.body);
+//         const newImage = new Image({
+//             imageName: req.body.imageName,
+//             imageData: req.file.path
+//         });
     
-    newImage.save()
-        .then((result) => {
-            console.log(result);
-            res.status(200).json({
-                success: true,
-                document: result
-            })
-        })
-        .catch((err) => next(err))
-})
+//     newImage.save()
+//         .then((result) => {
+//             console.log(result);
+//             res.status(200).json({
+//                 success: true,
+//                 document: result
+//             })
+//         })
+//         .catch((err) => next(err))
+// })
 
 //INDEX//
 router.get("/", auth, async (req,res) => {
@@ -63,11 +67,13 @@ router.get("/", auth, async (req,res) => {
 })
 
 //CREATE//
-router.post("/", auth, async (req,res) => {
+router.post("/post", auth, upload.single("file"), async (req,res, next) => {
     try {
         const { username } = req.payload
         req.body.username = username
         res.status(200).json(await Post.create(req.body))
+        console.log("hey")
+            console.log(req.body)
     }
     catch(error) {
         res.status(400).json({error})

@@ -2,12 +2,12 @@ const { Schema, model } = require("mongoose");
 
 const postSchema = new Schema (
     {
-       imageName: {
+       name: {
            type: String,
            default: "none",
            required: true
        },
-       imageData: {
+       file: {
            type: String,
            required: true
        }
